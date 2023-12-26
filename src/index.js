@@ -73,30 +73,36 @@ function animate(time) {
 function addMapPointer(lat, lon) {
     const phi = THREE.MathUtils.degToRad(90 - lat);
     const theta = THREE.MathUtils.degToRad(lon + 180);
-    const radius = 5.1;
+    const earthRadius = 5;
+    const pointerOffset = 0.1;
+    const pointerRadius = 0.05;
 
-    const x = -radius * Math.sin(phi) * Math.cos(theta);
-    const y = radius * Math.cos(phi);
-    const z = radius * Math.sin(phi) * Math.sin(theta);
+    const x = -(earthRadius + pointerOffset) * Math.sin(phi) * Math.cos(theta);
+    const y = (earthRadius + pointerOffset) * Math.cos(phi);
+    const z = (earthRadius + pointerOffset) * Math.sin(phi) * Math.sin(theta);
 
-    const pointerConeGeometry = new THREE.ConeGeometry(0.1, 0.4, 32);
+    const pointerGeometry = new THREE.SphereGeometry(pointerRadius, 32, 32);
     const pointerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-    const pointerCone = new THREE.Mesh(pointerConeGeometry, pointerMaterial);
-    pointerCone.position.set(x, y - 0.2, z);
-    pointerCone.rotateX(Math.PI);
+    const pointerMesh = new THREE.Mesh(pointerGeometry, pointerMaterial);
+    pointerMesh.position.set(x, y, z);
 
-    const pointerCylinderGeometry = new THREE.CylinderGeometry(0.05, 0.05, 0.2, 12);
-    const pointerCylinder = new THREE.Mesh(pointerCylinderGeometry, pointerMaterial);
-    pointerCylinder.position.set(x, y - 0.1, z);
-
-    scene.add(pointerCone);
-    scene.add(pointerCylinder);
+    scene.add(pointerMesh);
 
     setTimeout(() => additionalZoom(x, y, z), 500);
 }
 
+
 function additionalZoom(x, y, z) {
-    const newTargetPosition = { x: x * 1.5, y: y * 1.5, z: z * 1.5 };
+    const deltaX = x - camera.position.x;
+    const deltaY = y - camera.position.y;
+    const deltaZ = z - camera.position.z;
+
+    const zoomFactor = 0.8;
+    const newTargetPosition = {
+        x: camera.position.x + deltaX * zoomFactor,
+        y: camera.position.y + deltaY * zoomFactor,
+        z: camera.position.z + deltaZ * zoomFactor
+    };
 
     new TWEEN.Tween(camera.position)
         .to(newTargetPosition, 3000)
@@ -109,6 +115,7 @@ function additionalZoom(x, y, z) {
         })
         .start();
 }
+
 
 function triggerFadeToWhite() {
     fadeOverlay.style.display = 'block';
@@ -170,6 +177,8 @@ function zoomAndRotateToFrance() {
 document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('logo').src = logoSrc;
 });
+
+
 
 
 

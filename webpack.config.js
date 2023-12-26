@@ -17,7 +17,10 @@ module.exports = {
       },
     ],
   },
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.js',
+    page2: './src/page2.js',    
+  },
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist'),
@@ -38,11 +41,12 @@ module.exports = {
     }),
   ],
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     clean: true,
   },
   mode: 'development',
 };
+
 
