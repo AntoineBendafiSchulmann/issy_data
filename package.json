@@ -1,0 +1,26 @@
+{
+  "name": "bus-visualization-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve --open",
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^6.8.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^x.x.x",
+    "style-loader": "^3.3.3",
+    "webpack": "^x.x.x",
+    "webpack-cli": "^x.x.x",
+    "webpack-dev-server": "^x.x.x"
+  },
+  "dependencies": {
+    "@tweenjs/tween.js": "^21.0.0",
+    "three": "^0.128.0"
+  }
+}
