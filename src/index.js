@@ -75,7 +75,7 @@ function addMapPointer(lat, lon) {
     const theta = THREE.MathUtils.degToRad(lon + 180);
     const earthRadius = 5;
     const pointerOffset = 0.1;
-    const pointerRadius = 0.05;
+    const pointerRadius = 0.025;
 
     const x = -(earthRadius + pointerOffset) * Math.sin(phi) * Math.cos(theta);
     const y = (earthRadius + pointerOffset) * Math.cos(phi);
@@ -132,7 +132,7 @@ function triggerFadeToWhite() {
 }
 
 function redirectToPage() {
-    window.location.href = 'page2.html';
+    window.location.href = 'homepage.html';
 }
 
 function zoomAndRotateToFrance() {

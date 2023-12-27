@@ -9,7 +9,7 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpe?g|gif|svg|ico)$/i,
         type: 'asset/resource',
         generator: {
           filename: 'assets/[name][ext][query]'
@@ -19,7 +19,7 @@ module.exports = {
   },
   entry: {
     index: './src/index.js',
-    page2: './src/page2.js',    
+    page2: './src/homepage.js',    
   },
   devServer: {
     static: {
@@ -35,9 +35,9 @@ module.exports = {
       filename: 'index.html',
     }),
     new HtmlWebpackPlugin({
-      title: 'Page 2',
-      template: './src/page2.html',
-      filename: 'page2.html',
+      title: 'homepage',
+      template: './src/homepage.html',
+      filename: 'homepage.html',
     }),
   ],
   output: {
